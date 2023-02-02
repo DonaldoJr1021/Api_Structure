@@ -18,13 +18,18 @@ app.use(function(req, res, next){
     next();
 });
 
+// parse application/x-www-form-urlencoded
 app.use(bodyparser.urlencoded({extended: false}));
+
+// parse application/json
 app.use(bodyparser.json());
 
 
 // Configure port of server with .env or 4000 by default
 app.set('port', process.env.PORT || 4000);
-app.use('');
+app.use(require('./routes/index.user.routes'));
+app.use(require('./routes/index.product.routes'));
+
 
 // Create server
 server = http.createServer(app);
